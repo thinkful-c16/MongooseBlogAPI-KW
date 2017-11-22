@@ -3,3 +3,5 @@ CREATE TABLE stories (
     title TEXT NOT NULL,
     content TEXT
 );
+
+INSERT INTO stories (title, content)

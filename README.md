@@ -24,7 +24,7 @@ You have been hired to complete an API for a blog app. The previous developer wo
   - [x] Create a DELETE endpoint to remove a story - should return status 204 with no content
 
 - [x] Create and wire-up database to endpoints
-  - [ ] Create local Postgres database named `blog-app` (See: `createdb` on [SQL shell basics](https://courses.thinkful.com/node-sql-001v1/assignment/1.1.2) )
+  - [x] Create local Postgres database named `blog-app` (See: `createdb` on [SQL shell basics](https://courses.thinkful.com/node-sql-001v1/assignment/1.1.2) )
   > Note-to-self: If your local database doesn't work, try using ElephantSQL. But remember to put the connection string in an environment variable and use `dotenv` to prevent the UN/PW from being pushed to GitHub.
 - [ ] Create a `stories` table with the following schema.
   - 3 Columns:
