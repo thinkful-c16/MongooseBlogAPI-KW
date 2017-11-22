@@ -5,17 +5,24 @@ const router = express.Router();
 
 var data = require('../db/dummy-data');
 
-// const { DATABASE } = require('../config');
-// const knex = require('knex')(DATABASE);
+const { DATABASE, PORT } = require('../config');
+//knex needs to know which db to talk to
+const knex = require('knex')(DATABASE);
 
 /* ========== GET/READ ALL ITEMS ========== */
 router.get('/stories', (req, res) => {
-  if (req.query.search) {
-    const filtered = data.filter((obj) => obj.title.includes(req.query.search));
-    res.json(filtered);
-  } else {
-    res.json(data);
-  }
+  // if (req.query.search) {
+  //   const filtered = data.filter((obj) => obj.title.includes(req.query.search));
+  //   res.json(filtered);
+  // } else {
+  //   res.json(data);
+  // }
+  //here is the query
+  knex.select()
+    .from('stories')
+    .then(results => {
+      res.json(results).status(201);
+    });
 });
 
 /* ========== GET/READ SINGLE ITEMS ========== */
