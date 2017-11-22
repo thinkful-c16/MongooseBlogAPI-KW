@@ -10,6 +10,8 @@ CREATE TABLE stories (
 -- ALTER SEQUENCE stories_id_seq RESTART WITH 1000;
 
 INSERT INTO stories (title, content) VALUES 
-('first post', 'post content here');
+('first post', 'post content here'),
+('cats are awesome', 'cats are so freaking awesome'),
+('dogs are better', 'dogs are the freaking best and better than cats');
 
 

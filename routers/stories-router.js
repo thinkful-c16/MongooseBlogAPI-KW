@@ -11,13 +11,6 @@ const knex = require('knex')(DATABASE);
 
 /* ========== GET/READ ALL ITEMS ========== */
 router.get('/stories', (req, res) => {
-  // if (req.query.search) {
-  //   const filtered = data.filter((obj) => obj.title.includes(req.query.search));
-  //   res.json(filtered);
-  // } else {
-  //   res.json(data);
-  // }
-  //here is the query
   knex.select()
     .from('stories')
     .then(results => {
@@ -31,9 +24,13 @@ router.get('/stories', (req, res) => {
 
 /* ========== GET/READ SINGLE ITEMS ========== */
 router.get('/stories/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const item = data.find((obj) => obj.id === id);
-  res.json(item);
+  // const id = Number(req.params.id);
+  // const item = data.find((obj) => obj.id === id);
+  // res.json(item);
+  knex.select()
+    .from('stories')
+    .where('stories.id', req.params.id)
+    .then(results => res.json(results).status(200));
 });
 
 /* ========== POST/CREATE ITEM ========== */
