@@ -21,7 +21,11 @@ router.get('/stories', (req, res) => {
   knex.select()
     .from('stories')
     .then(results => {
-      res.json(results).status(201);
+      res.json(results).status(200);
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json(err.message);
     });
 });
 
