@@ -32,18 +32,16 @@ router.get('/stories/:id', (req, res) => {
 
 /* ========== POST/CREATE ITEM ========== */
 router.post('/stories', jsonParser,  (req, res) => {
-  // const {title, content} = req.body;
-  
-  // /***** Never Trust Users! *****/
-  
-  // const newItem = {
-  //   id: data.nextVal++,
-  //   title: title,
-  //   content: content
-  // };
-  // data.push(newItem);
-  // res.location(`${req.originalUrl}/${newItem.id}`).status(201).json(newItem);
-  // const {title, content} = req.body;
+  const requiredData = ['title', 'content'];
+  for (let i=0; i < requiredData.length; i++) {
+    const field = requiredData[i];
+    if (!(field in req.body)) {
+      const msg = `Missing ${field} in request body`;
+      console.error(msg);
+      return res.status(400).send(msg);
+    }
+  }
+
 
   knex
     .returning(['id', 'title', 'content'])
