@@ -38,8 +38,8 @@ You have been hired to complete an API for a blog app. The previous developer wo
       postgres://<USERNAME>:<PASSWORD>@<SERVER:PORT>/<DATABASE>
 - [x] Update `config.js` with DB connection info (see [node-restaurants-app-knex](https://github.com/cklanac/node-restaurants-app-knex))
 - Replace **dummy data** with real database calls
-  - [ ] Update GET `/api/v1/stories` endpoint to use `knex.select()...`
-  - [ ] Update GET `/api/v1/stories/:id` endpoint to use `knex.select()...`
+  - [x] Update GET `/api/v1/stories` endpoint to use `knex.select()...`
+  - [x] Update GET `/api/v1/stories/:id` endpoint to use `knex.select()...`
   - [ ] Update POST `/api/v1/stories/` endpoint to use `knex.insert()...`
   - [ ] Update PUT `/api/v1/stories/:id` endpoint to use `knex.update()...`
   - [ ] Update DELETE `/api/v1/stories/:id` endpoint to use `knex.del()...`

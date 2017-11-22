@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
 
 var data = require('../db/dummy-data');
 
@@ -15,18 +16,11 @@ router.get('/stories', (req, res) => {
     .from('stories')
     .then(results => {
       res.json(results).status(200);
-    })
-    .catch(err => {
-      console.error(err);
-      return res.status(500).json(err.message);
     });
 });
 
 /* ========== GET/READ SINGLE ITEMS ========== */
 router.get('/stories/:id', (req, res) => {
-  // const id = Number(req.params.id);
-  // const item = data.find((obj) => obj.id === id);
-  // res.json(item);
   knex.select()
     .from('stories')
     .where('stories.id', req.params.id)
@@ -34,18 +28,31 @@ router.get('/stories/:id', (req, res) => {
 });
 
 /* ========== POST/CREATE ITEM ========== */
-router.post('/stories', (req, res) => {
-  const {title, content} = req.body;
+router.post('/stories', bodyParser, (req, res) => {
+  // const {title, content} = req.body;
   
-  /***** Never Trust Users! *****/
+  // /***** Never Trust Users! *****/
   
-  const newItem = {
-    id: data.nextVal++,
-    title: title,
-    content: content
-  };
-  data.push(newItem);
-  res.location(`${req.originalUrl}/${newItem.id}`).status(201).json(newItem);
+  // const newItem = {
+  //   id: data.nextVal++,
+  //   title: title,
+  //   content: content
+  // };
+  // data.push(newItem);
+  // res.location(`${req.originalUrl}/${newItem.id}`).status(201).json(newItem);
+  // const {title, content} = req.body;
+
+  // const newItem = {
+  // };
+  knex
+    .returning(['title', 'content'])
+    .insert([{title: req.body.title, content: req.body.content}])
+    .into('stories')
+    .debug(true)
+    .then(results => res.status(201).json(results));
+
+
+
 });
 
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
