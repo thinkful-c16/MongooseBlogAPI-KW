@@ -3,6 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+
+
 
 var data = require('../db/dummy-data');
 
@@ -28,7 +31,7 @@ router.get('/stories/:id', (req, res) => {
 });
 
 /* ========== POST/CREATE ITEM ========== */
-router.post('/stories', bodyParser, (req, res) => {
+router.post('/stories', jsonParser,  (req, res) => {
   // const {title, content} = req.body;
   
   // /***** Never Trust Users! *****/
@@ -42,14 +45,15 @@ router.post('/stories', bodyParser, (req, res) => {
   // res.location(`${req.originalUrl}/${newItem.id}`).status(201).json(newItem);
   // const {title, content} = req.body;
 
-  // const newItem = {
-  // };
   knex
-    .returning(['title', 'content'])
-    .insert([{title: req.body.title, content: req.body.content}])
+    .returning(['id', 'title', 'content'])
+    .insert({title: req.body.title, content: req.body.content})
     .into('stories')
     .debug(true)
-    .then(results => res.status(201).json(results));
+    .then(results => res.status(201, 'created').location(`/stories/${results.id}`).json(results))
+    .catch(error => {
+      console.error(error);
+    });
 
 
 
