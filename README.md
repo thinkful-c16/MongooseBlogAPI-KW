@@ -26,7 +26,7 @@ You have been hired to complete an API for a blog app. The previous developer wo
 - [x] Create and wire-up database to endpoints
   - [x] Create local Postgres database named `blog-app` (See: `createdb` on [SQL shell basics](https://courses.thinkful.com/node-sql-001v1/assignment/1.1.2) )
   > Note-to-self: If your local database doesn't work, try using ElephantSQL. But remember to put the connection string in an environment variable and use `dotenv` to prevent the UN/PW from being pushed to GitHub.
-- [ ] Create a `stories` table with the following schema.
+- [x] Create a `stories` table with the following schema.
   - 3 Columns:
     - `id`: an autoincrementing integer
     - `title`: regular text. Required.
@@ -36,7 +36,7 @@ You have been hired to complete an API for a blog app. The previous developer wo
 
       psql -f ./query.sql -U <username> -d blog-app
       postgres://<USERNAME>:<PASSWORD>@<SERVER:PORT>/<DATABASE>
-- [ ] Update `config.js` with DB connection info (see [node-restaurants-app-knex](https://github.com/cklanac/node-restaurants-app-knex))
+- [x] Update `config.js` with DB connection info (see [node-restaurants-app-knex](https://github.com/cklanac/node-restaurants-app-knex))
 - Replace **dummy data** with real database calls
   - [ ] Update GET `/api/v1/stories` endpoint to use `knex.select()...`
   - [ ] Update GET `/api/v1/stories/:id` endpoint to use `knex.select()...`
