@@ -35,14 +35,13 @@ router.post('/stories', jsonParser,  (req, res) => {
   const requiredData = ['title', 'content'];
   for (let i=0; i < requiredData.length; i++) {
     const field = requiredData[i];
+    // const emptyStr = '';
     if (!(field in req.body)) {
       const msg = `Missing ${field} in request body`;
       console.error(msg);
       return res.status(400).send(msg);
     }
   }
-
-
   knex
     .returning(['id', 'title', 'content'])
     .insert({title: req.body.title, content: req.body.content})
