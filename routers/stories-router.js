@@ -7,7 +7,7 @@ const jsonParser = bodyParser.json();
 
 
 
-var data = require('../db/dummy-data');
+// var data = require('../db/dummy-data');
 
 const { DATABASE, PORT } = require('../config');
 //knex needs to know which db to talk to
@@ -35,10 +35,14 @@ router.post('/stories', jsonParser,  (req, res) => {
   const requiredData = ['title', 'content'];
   for (let i=0; i < requiredData.length; i++) {
     const field = requiredData[i];
-    // const emptyStr = '';
     if (!(field in req.body)) {
       const msg = `Missing ${field} in request body`;
       console.error(msg);
+      return res.status(400).send(msg);
+    }
+    if (req.body.title.length === 0) {
+      const msg = 'Item must have a title';
+      console.log(msg);
       return res.status(400).send(msg);
     }
   }
@@ -72,11 +76,15 @@ router.put('/stories/:id', jsonParser, (req, res) => {
       return res.status(400).send('Missing required fields.');
     }
   }
-
   if (id !== req.body.id) {
     const msg = `Request id (${req.params.id}) and request body id (${req.body.id}) must match`;
     console.error(msg);
     return res.status(400).send(msg);
+  }
+  if (req.body.title.length === 0) {
+    const msg = 'Item must have a title';
+    console.log(msg);
+    res.status(400).send(msg);
   }
 
   knex('stories')
