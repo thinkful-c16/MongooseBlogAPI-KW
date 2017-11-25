@@ -80,15 +80,18 @@ router.put('/stories/:id', jsonParser, (req, res) => {
   }
 
   knex('stories')
+    .returning(['title', 'content'])
     .where('id', '=', id)
     .update({title: req.body.title, content: req.body.content})
     .debug(true)
     .then(
-      console.log(`Updating story id num ${req.params.id}....`),
+      // console.log(`Updating story id num ${req.params.id}....`),
       results => {
         res.status(200, 'updated').location(`stories/${results.id}`).json(results);
       });      
 });
+
+
 
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
 router.delete('/stories/:id', (req, res) => {
