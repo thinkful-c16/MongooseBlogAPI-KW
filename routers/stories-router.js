@@ -59,11 +59,11 @@ router.put('/stories/:id', jsonParser, (req, res) => {
   
   // /***** Never Trust Users! *****/
   
-  // const id = Number(req.params.id);
+  const id = Number(req.params.id);
   // const item = data.find((obj) => obj.id === id);
   // Object.assign(item, {title, content});
   // res.json(item);
-  const requiredFields = ['id', 'title', 'content'];
+  const requiredFields = ['id','title', 'content'];
   for (let i=0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -73,39 +73,21 @@ router.put('/stories/:id', jsonParser, (req, res) => {
     }
   }
 
-  if (req.params.id !== req.body.id) {
+  if (id !== req.body.id) {
     const msg = `Request id (${req.params.id}) and request body id (${req.body.id}) must match`;
     console.error(msg);
     return res.status(400).send(msg);
   }
-  const userStoryId = req.params.id; 
-  knex
-  
-    .where(userStoryId, '=', 'id')
-    .update(
-      {
-        title: req.body.title,
-        content: req.body.content
-      })
+
+  knex('stories')
+    .where('id', '=', id)
+    .update({title: req.body.title, content: req.body.content})
+    .debug(true)
     .then(
-      console.log(`Updating story id num ${userStoryId}....`),
+      console.log(`Updating story id num ${req.params.id}....`),
       results => {
-        
-        res.status(200, 'updated').json(results);
-      //   {
-      //     "name": "error",
-      //     "length": 90,
-      //     "severity": "ERROR",
-      //     "code": "42601",
-      //     "position": "21",
-      //     "file": "scan.l",
-      //     "line": "1086",
-      //     "routine": "scanner_yyerror"
-      // }
-      // got a strange error on the PUT request
-
-      });
-
+        res.status(200, 'updated').location(`stories/${results.id}`).json(results);
+      });      
 });
 
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
