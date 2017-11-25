@@ -85,7 +85,6 @@ router.put('/stories/:id', jsonParser, (req, res) => {
     .update({title: req.body.title, content: req.body.content})
     .debug(true)
     .then(
-      // console.log(`Updating story id num ${req.params.id}....`),
       results => {
         res.status(200, 'updated').location(`stories/${results.id}`).json(results);
       });      
@@ -96,9 +95,13 @@ router.put('/stories/:id', jsonParser, (req, res) => {
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
 router.delete('/stories/:id', (req, res) => {
   const id = Number(req.params.id);
-  const index = data.findIndex((obj) => obj.id === id);
-  data.splice(index, 1);
-  res.status(204).end();
+  // const index = data.findIndex((obj) => obj.id === id);
+  // data.splice(index, 1);
+  // res.status(204).end();
+  knex('stories')
+    .where('id', '=', id)
+    .del()
+    .then(res.status(204).end());
 });
 
 module.exports = router;
