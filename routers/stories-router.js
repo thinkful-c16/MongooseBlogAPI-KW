@@ -81,7 +81,7 @@ router.put('/stories/:id', jsonParser, (req, res) => {
   const userStoryId = req.params.id; 
   knex
   
-    .where(userStoryId)
+    .where(userStoryId, '=', 'id')
     .update(
       {
         title: req.body.title,
@@ -92,19 +92,21 @@ router.put('/stories/:id', jsonParser, (req, res) => {
       results => {
         
         res.status(200, 'updated').json(results);
+      //   {
+      //     "name": "error",
+      //     "length": 90,
+      //     "severity": "ERROR",
+      //     "code": "42601",
+      //     "position": "21",
+      //     "file": "scan.l",
+      //     "line": "1086",
+      //     "routine": "scanner_yyerror"
+      // }
+      // got a strange error on the PUT request
 
       });
 
 });
-
-// .returning(['id', 'title', 'content'])
-// .insert({title: req.body.title, content: req.body.content})
-// .into('stories')
-// .debug(true)
-// .then(results => res.status(201, 'created').location(`/stories/${results.id}`).json(results))
-// .catch(error => {
-//   console.error(error);
-// });
 
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
 router.delete('/stories/:id', (req, res) => {
