@@ -86,7 +86,7 @@ const handleUpdate = function (event) {
   const el = $(event.target);
 
   const document = {
-    id: store.item.id,
+    id: store.item[0].id,
     title: el.find('[name=title]').val(),
     content: el.find('[name=content]').val()
   };
