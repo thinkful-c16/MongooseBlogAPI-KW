@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS stories;
+-- DROP TABLE IF EXISTS stories;
 -- //^^^ !!!DO NOT RUN THIS COMMAND IN PRODUCTION!!!!! ^^^
 
 CREATE TABLE stories (
