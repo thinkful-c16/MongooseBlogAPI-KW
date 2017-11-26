@@ -1,6 +1,8 @@
 /* global jQuery, handle, $, api */
 'use strict';
 
+//the store changed to an array of objects with each item selected in the app being the 0 index.//
+
 const ITEMS_URL = '/api/v1/stories/';
 
 const renderPage = function (store) {
@@ -124,7 +126,7 @@ const handleDetails = function (event) {
 const handleRemove = function (event) {
   event.preventDefault();
   const store = event.data;
-  const id = store.item.id;
+  const id = store.item[0].id;
 
   api.remove(id, store.token)
     .then(() => {
