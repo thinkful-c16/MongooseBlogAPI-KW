@@ -32,8 +32,8 @@ const renderEdit = function (store) {
 const renderDetail = function (store) {
   const el = $('#detail');
   const item = store.item;
-  el.find('.title').text(item.title);
-  el.find('.content').text(item.content);
+  el.find('.title').text(item[0].title);
+  el.find('.content').text(item[0].content);
 };
 
 const handleSearch = function (event) {

@@ -5,8 +5,6 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-
-
 // var data = require('../db/dummy-data');
 
 const { DATABASE, PORT } = require('../config');
@@ -73,7 +71,7 @@ router.put('/stories/:id', jsonParser, (req, res) => {
     if (!(field in req.body)) {
       const msg = `Missing \`${field}\` in request body`;
       console.error(msg);
-      return res.status(400).send('Missing required fields.');
+      return res.status(400).send('Missing a required field.');
     }
   }
   if (id !== req.body.id) {
@@ -97,8 +95,6 @@ router.put('/stories/:id', jsonParser, (req, res) => {
         res.status(200, 'updated').location(`stories/${results.id}`).json(results);
       });      
 });
-
-
 
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
 router.delete('/stories/:id', (req, res) => {
