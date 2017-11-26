@@ -24,7 +24,7 @@ const renderResults = function (store) {
 
 const renderEdit = function (store) {
   const el = $('#edit');
-  const item = store.item;
+  const item = store.item[0];
   el.find('[name=title]').val(item.title);
   el.find('[name=content]').val(item.content);
 }; 
