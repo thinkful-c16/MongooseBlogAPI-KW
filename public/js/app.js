@@ -26,7 +26,7 @@ const renderResults = function (store) {
 
 const renderEdit = function (store) {
   const el = $('#edit');
-  const item = store.item[0];
+  const item = store.item;
   el.find('[name=title]').val(item.title);
   el.find('[name=content]').val(item.content);
 }; 
@@ -34,8 +34,8 @@ const renderEdit = function (store) {
 const renderDetail = function (store) {
   const el = $('#detail');
   const item = store.item;
-  el.find('.title').text(item[0].title);
-  el.find('.content').text(item[0].content);
+  el.find('.title').text(item.title);
+  el.find('.content').text(item.content);
 };
 
 const handleSearch = function (event) {
@@ -88,7 +88,7 @@ const handleUpdate = function (event) {
   const el = $(event.target);
 
   const document = {
-    id: store.item[0].id,
+    id: store.item.id,
     title: el.find('[name=title]').val(),
     content: el.find('[name=content]').val()
   };
@@ -126,7 +126,7 @@ const handleDetails = function (event) {
 const handleRemove = function (event) {
   event.preventDefault();
   const store = event.data;
-  const id = store.item[0].id;
+  const id = store.item.id;
 
   api.remove(id, store.token)
     .then(() => {

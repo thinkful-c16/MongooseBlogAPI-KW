@@ -29,5 +29,5 @@ button {
 #detail,
 #create,
 #edit {
-  /* display: none; */
+  display: none;
 }

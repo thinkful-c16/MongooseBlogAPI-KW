@@ -22,7 +22,7 @@ router.get('/stories', (req, res) => {
 
 /* ========== GET/READ SINGLE ITEMS ========== */
 router.get('/stories/:id', (req, res) => {
-  knex.select()
+  knex.first()
     .from('stories')
     .where('stories.id', req.params.id)
     .then(results => res.json(results).status(200));
@@ -86,13 +86,13 @@ router.put('/stories/:id', jsonParser, (req, res) => {
   }
 
   knex('stories')
-    .returning(['title', 'content'])
     .where('id', '=', id)
+    .returning(['title', 'content'])
     .update({title: req.body.title, content: req.body.content})
     .debug(true)
     .then(
       results => {
-        res.status(200, 'updated').location(`stories/${results.id}`).json(results);
+        res.status(200, 'updated').location(`stories/${results.id}`).json(results[0]);
       });      
 });
 
