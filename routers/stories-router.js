@@ -17,10 +17,9 @@ router.get('/posts', (req, res) => {
     .find({})
     .then(blogposts => {
       res.status(200, 'ok')
-        .json({
-          blogposts: blogposts.map(
-            (post) => post.apiRepr())
-        });
+        .json(blogposts.map(
+          (post) => post.apiRepr())
+        );
     })
     .catch(err => {
       console.error(err);

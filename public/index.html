@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<h2>API Client</h2>
+	<h2>Blog Posts</h2>
 	<ul id="nav">
 		<li> </li><a href="" class="viewSearch">List</a> |
 		<li> </li><a href="" class="viewCreate">Create</a>
@@ -20,7 +20,7 @@
 
 	<form id="search" class="view">
 		<div id="result"></div>
-		<a href="" class="viewCreate">Create a Story</a>
+		<a href="" class="viewCreate">Create a Post</a>
 	</form>
 
 	<section id="detail" class="view">
@@ -50,6 +50,14 @@
 			<div>
 				<label for="name">Content</label>
 				<textarea rows="4" cols="50" name="content"></textarea>
+			</div>
+			<div>
+				<label for="name">First Name:</label>
+				<input type="text" name="firstName">
+			</div>
+			<div>
+				<label for="name">Last Name:</label>
+				<input type="text" name="lastName">
 			</div>
 
 			<button type="submit">Submit</button>
