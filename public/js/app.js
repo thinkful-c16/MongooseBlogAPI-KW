@@ -3,7 +3,7 @@
 
 //the store changed to an array of objects with each item selected in the app being the 0 index.//
 
-const ITEMS_URL = '/api/v1/stories/';
+const ITEMS_URL = '/api/v1/posts/';
 
 const renderPage = function (store) {
   if (store.demo) {
