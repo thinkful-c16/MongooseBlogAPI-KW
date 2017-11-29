@@ -71,13 +71,32 @@ router.post('/posts', jsonParser,  (req, res) => {
 
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
 router.put('/posts/:id', jsonParser, (req, res) => {
-  //   const id = Number(req.params.id);
 
-  // if (id !== req.body.id) {
-  //   const msg = `Request id (${id}) and request body id (${req.body.id}) must match.`;
-  //   console.error(msg);
-  //   res.status(400).send(msg);
-  // }
+  if (!(req.params.id === req.body.id)) {
+    const msg = `Request id (${req.params.id}) and request body id (${req.body.id}) must match.`;
+    console.error(msg);
+    res.status(400).json({message: msg});
+  }
+
+  const toUpdate = {};
+  const updateableFields = ['title', 'content', 'author'];
+
+  updateableFields.forEach(field => {
+    console.log(field);
+    if (field in req.body)  {
+      console.log(req.body[field]);
+      toUpdate[field] = req.body[field];
+      console.log(toUpdate);
+    }
+    BlogPost
+      .findByIdAndUpdate(req.body.id, {$set: toUpdate})
+      .then(blogpost => res.status(204).end())
+      .catch(err => res.status(500).json({message: 'Internal server error.}'}));
+
+
+  });
+  
+
         
 });
 
