@@ -21,15 +21,22 @@ router.get('/posts', (req, res) => {
           blogposts: blogposts.map(
             (post) => post.apiRepr())
         });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error.'});
     });
 });
 
 /* ========== GET/READ SINGLE ITEMS ========== */
 router.get('/posts/:id', (req, res) => {
-  // BlogPost
-  //   .findById(req.params.id)
-  //   .then(results => res.status(200).json(results.apiRepr()));
-
+  BlogPost
+    .findById(req.params.id)
+    .then(results => res.status(200, 'ok').json(results.apiRepr()))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error.'});
+    });
 });
 
 /* ========== POST/CREATE ITEM ========== */
