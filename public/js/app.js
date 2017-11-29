@@ -36,6 +36,7 @@ const renderDetail = function (store) {
   const item = store.item;
   el.find('.title').text(item.title);
   el.find('.content').text(item.content);
+  el.find('.author').text(item.author);
 };
 
 const handleSearch = function (event) {
@@ -90,7 +91,10 @@ const handleUpdate = function (event) {
   const document = {
     id: store.item.id,
     title: el.find('[name=title]').val(),
-    content: el.find('[name=content]').val()
+    content: el.find('[name=content]').val(),
+    // author: { "firstName": el.find'[name=firstName]'.val()},
+  
+    
   };
   api.update(document, store.token)
     .then(response => {
