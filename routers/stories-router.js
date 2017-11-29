@@ -90,18 +90,19 @@ router.put('/posts/:id', jsonParser, (req, res) => {
     }
     BlogPost
       .findByIdAndUpdate(req.body.id, {$set: toUpdate})
-      .then(blogpost => res.status(204).end())
+      .then(blogpost => res.status(200).end())
       .catch(err => res.status(500).json({message: 'Internal server error.}'}));
-
 
   });
   
-
-        
 });
 
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
 router.delete('/posts/:id', (req, res) => {
+  BlogPost
+    .findByIdAndRemove(req.params.id)
+    .then(() => res.status(204).end())
+    .catch(err => res.status(500).json({message: 'Internal server error.'}));
 
 });
 
