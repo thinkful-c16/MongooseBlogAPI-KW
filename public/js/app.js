@@ -29,6 +29,9 @@ const renderEdit = function (store) {
   const item = store.item;
   el.find('[name=title]').val(item.title);
   el.find('[name=content]').val(item.content);
+  el.find('[name=author]').val(item.author);
+  // el.find('[name=lastName]').val(item.author);
+  // el.find('[name=firstName]').val(item.author);
 }; 
 
 const renderDetail = function (store) {
@@ -69,7 +72,12 @@ const handleCreate = function (event) {
 
   const document = {
     title: el.find('[name=title]').val(),
-    content: el.find('[name=content]').val()
+    content: el.find('[name=content]').val(),
+    // author: el.find('[name=author]').val()
+    author: {
+      firstName: el.find('[name=author]').val().split(' ')[0],
+      lastName: el.find('[name=author]').val().split(' ')[1]
+    } 
   };
   api.create(document)
     .then(response => {
@@ -92,7 +100,11 @@ const handleUpdate = function (event) {
     id: store.item.id,
     title: el.find('[name=title]').val(),
     content: el.find('[name=content]').val(),
-    // author: { "firstName": el.find'[name=firstName]'.val()},
+    // author: el.find('[name=author]').val()
+    author: {
+      firstName: el.find('[name=author]').val().split(' ')[0],
+      lastName: el.find('[name=author]').val().split(' ')[1]
+    } 
   
     
   };

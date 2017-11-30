@@ -79,17 +79,20 @@ router.put('/posts/:id', jsonParser, (req, res) => {
 
   const toUpdate = {};
   const updateableFields = ['title', 'content', 'author'];
-
+  console.log(req.body);
   updateableFields.forEach(field => {
-    console.log(field);
+    // console.log(field);
     if (field in req.body)  {
-      console.log(req.body[field]);
+      // console.log(req.body[field]);
       toUpdate[field] = req.body[field];
-      console.log(toUpdate);
+      // console.log(toUpdate);
     }
     BlogPost
-      .findByIdAndUpdate(req.body.id, {$set: toUpdate})
-      .then(blogpost => res.status(200).end())
+      .findByIdAndUpdate(req.body.id, {$set: toUpdate}, {new: true})
+      .then(blogpost => {
+        console.log(blogpost);
+        res.status(200).json(blogpost.apiRepr());
+      })
       .catch(err => res.status(500).json({message: 'Internal server error.}'}));
 
   });
