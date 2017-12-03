@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,12 @@
   },
   "homepage": "https://github.com/cklanac/blog-app#readme",
   "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "express": "^4.16.2",
+    "faker": "^4.1.0",
     "knex": "^0.14.1",
+    "mocha": "^4.0.1",
     "mongoose": "^4.13.5",
     "morgan": "^1.9.0",
     "pg": "^7.4.0"

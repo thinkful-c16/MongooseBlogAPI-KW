@@ -15,4 +15,6 @@ const DATABASE_URL = process.env.DATABASE_URL || global.DATABASE_URL ||'mongodb:
 // };
 exports.DATABASE_URL = DATABASE_URL;
 
+exports.TEST_DATABASE_URL ='mongodb://localhost/testing-blog-app';
+
 exports.PORT = process.env.PORT || 8080; 
