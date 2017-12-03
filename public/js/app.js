@@ -108,7 +108,8 @@ const handleUpdate = function (event) {
   
     
   };
-  api.update(document, store.token)
+  //store.token was the second param below
+  api.update(document)
     .then(response => {
       store.item = response;
       store.list = null; //invalidate cached list results

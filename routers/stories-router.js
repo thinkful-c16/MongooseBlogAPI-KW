@@ -90,7 +90,7 @@ router.put('/posts/:id', jsonParser, (req, res) => {
     BlogPost
       .findByIdAndUpdate(req.body.id, {$set: toUpdate}, {new: true})
       .then(blogpost => {
-        console.log(blogpost);
+        // console.log('the updated post====>', blogpost);
         res.status(200).json(blogpost.apiRepr());
       })
       .catch(err => res.status(500).json({message: 'Internal server error.}'}));
