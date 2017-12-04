@@ -61,54 +61,54 @@ describe('Blog Posts API resource', function() {
     return closeServer();
   });
   
-  describe('GET endpoint', function() {
+  // describe('GET endpoint', function() {
     
-    it('should return all existing blog entries', function() {
-      let res;
-      return chai.request(app)
+  //   it('should return all existing blog entries', function() {
+  //     let res;
+  //     return chai.request(app)
     
-        .get('/api/v1/posts')
-        .then(function(_res) {
-          res = _res;
-          res.should.have.status(200);
-          res.body.should.have.lengthOf.at.least(1);
-          return BlogPost.count();
-        })
-        .then(function(count){
-          res.body.should.have.lengthOf(count);
-        });
-    });
+  //       .get('/api/v1/posts')
+  //       .then(function(_res) {
+  //         res = _res;
+  //         res.should.have.status(200);
+  //         res.body.should.have.lengthOf.at.least(1);
+  //         return BlogPost.count();
+  //       })
+  //       .then(function(count){
+  //         res.body.should.have.lengthOf(count);
+  //       });
+  //   });
 
-    it('should return blog posts with the correct fields', function() {
-      let resPost;
-      return chai.request(app)
-        .get('/api/v1/posts')
-        .then(function(res) {
-          res.should.have.status(200);
-          res.should.be.json;
-          res.body.should.be.a('array');
-          res.body.should.have.lengthOf.at.least(1);
+  //   it('should return blog posts with the correct fields', function() {
+  //     let resPost;
+  //     return chai.request(app)
+  //       .get('/api/v1/posts')
+  //       .then(function(res) {
+  //         res.should.have.status(200);
+  //         res.should.be.json;
+  //         res.body.should.be.a('array');
+  //         res.body.should.have.lengthOf.at.least(1);
 
-          res.body.forEach(function(post) {
-            post.should.be.a('object');
-            post.should.include.keys(
-              'id', 'title', 'content', 'author', 'created');
-          });
-          resPost = res.body[0];
-          return BlogPost.findById(resPost.id);
-        })
-        .then(function(post) {
-          resPost.id.should.equal(post.id);
-          resPost.author.should.contain(post.author.lastName && post.author.firstName);
-          resPost.content.should.equal(post.content);
-          // resPost.created.should.equal(true);
-          // moment(resPost.created,moment.ISO_8601).toString().should.equal(moment(post.created,moment.ISO_8601).toString());
-        //   resPost.created.should.equal(post.created);
+  //         res.body.forEach(function(post) {
+  //           post.should.be.a('object');
+  //           post.should.include.keys(
+  //             'id', 'title', 'content', 'author', 'created');
+  //         });
+  //         resPost = res.body[0];
+  //         return BlogPost.findById(resPost.id);
+  //       })
+  //       .then(function(post) {
+  //         resPost.id.should.equal(post.id);
+  //         resPost.author.should.contain(post.author.lastName && post.author.firstName);
+  //         resPost.content.should.equal(post.content);
+  //         // resPost.created.should.equal(true);
+  //         // moment(resPost.created,moment.ISO_8601).toString().should.equal(moment(post.created,moment.ISO_8601).toString());
+  //       //   resPost.created.should.equal(post.created);
 
-        //   resPost.created.should.equal(moment(post.created, moment.ISO_8601)._i);
-        });
-    });
-  });
+  //       //   resPost.created.should.equal(moment(post.created, moment.ISO_8601)._i);
+  //       });
+  //   });
+  // });
 
   // describe('POST endpoint', function() {
 
