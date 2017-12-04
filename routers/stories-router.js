@@ -70,7 +70,7 @@ router.post('/posts', jsonParser,  (req, res) => {
 
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
 router.put('/posts/:id', jsonParser, (req, res) => {
-
+ 
   if (!(req.params.id === req.body.id)) {
     const msg = `Request id (${req.params.id}) and request body id (${req.body.id}) must match.`;
     console.error(msg);
@@ -87,15 +87,16 @@ router.put('/posts/:id', jsonParser, (req, res) => {
       toUpdate[field] = req.body[field];
       // console.log(toUpdate);
     }
-    BlogPost
-      .findByIdAndUpdate(req.body.id, {$set: toUpdate}, {new: true})
-      .then(blogpost => {
-        // console.log('the updated post====>', blogpost);
-        res.status(200).json(blogpost.apiRepr());
-      })
-      .catch(err => res.status(500).json({message: 'Internal server error.}'}));
-
   });
+  BlogPost
+    .findByIdAndUpdate(req.body.id, {$set: toUpdate}, {new: true})
+    .then(blogpost => {
+    // console.log('the updated post====>', blogpost);
+    // res.status(200).json(blogpost.apiRepr());
+      res.json(blogpost.apiRepr());
+    
+    })
+    .catch(err => res.status(500).json({message: 'Internal server error.}'}));
   
 });
 
