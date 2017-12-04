@@ -78,7 +78,7 @@ describe('Blog Posts API resource', function() {
           res.body.should.have.lengthOf(count);
         });
     });
-  }
+  });
   //   it('should return blog posts with the correct fields', function() {
   //     let resPost;
   //     return chai.request(app)
